@@ -1,5 +1,7 @@
 venv/
 .env
+.streamlit/secrets.toml
+progress.json
 __pycache__/
 *.pyc
 .DS_Store

@@ -8,42 +8,42 @@ It helps students learn and revise topics by generating explanations, summaries,
 
 ## ✨ Features
 
-### 💡 Explain Topics
-Enter any topic and receive an AI-generated explanation based on your selected difficulty level.
+### 🧠 8 Study Modes
+- **💡 Explain Topic** – step-by-step explanations with examples and common mistakes
+- **📝 Summarize Notes** – structured summaries with a key-terms table
+- **❓ Generate Quiz** – 3 to 40 interactive multiple-choice questions
+- **🃏 Flashcards** – flip cards with hints, "I knew it" tracking and shuffle
+- **🗺️ Mind Map** – a visual, colour-coded map of the whole topic
+- **📅 Study Plan** – a day-by-day plan based on your available days and minutes per day
+- **🎭 Explain with Analogy** – learn through creative real-life comparisons
+- **🧑‍🏫 Feynman Check** – explain a topic in your own words and get scored (0–100) on strengths, gaps and misconceptions
 
-### 📝 Summarize Notes
-Paste study notes or text and generate a concise, structured summary.
+### 💬 AI Tutor Chat
+A streaming, multi-turn chat with four tutor personalities: Friendly Tutor, Socratic Coach, Strict Examiner and Explain Like I'm 5.
 
-### ❓ Interactive Quiz
-Generate a 5-question multiple-choice quiz using AI.
+### 📎 Study From Your Own Material & Photos
+Upload one or more PDF, TXT or MD files, or photos of your notebook or textbook (JPG, PNG, WEBP). Photos are read by a vision model (`qwen/qwen3.8-27b` on Groq), and every mode and the chat then use that material as the source.
 
-The application allows users to:
-- Select answers
-- Submit the quiz
-- Receive a score
-- View correct answers
-- Read AI-generated explanations
+### 🧠 Mistake Coach
+After a quiz, the AI explains every wrong answer, gives memory tricks and suggests practice questions.
 
-### 🧠 Flashcards
-Generate revision flashcards automatically for any topic.
+### 🏅 Streaks, Badges & Progress
+Daily study streaks, 7 unlockable badges, study-session counts and a quiz-score trend chart. Progress is saved privately in each student's own browser, so friends never see each other's stats.
 
-### 🎯 Difficulty Levels
-Choose between:
-- Beginner
-- Intermediate
-- Advanced
+### ✨ Smart Navigation
+After generating a quiz or flashcards, the app jumps straight to that tab. Other results scroll into view automatically.
 
-### 📏 Response Length
-Choose:
-- Short
-- Medium
-- Detailed
+### 💬 Rotating Motivational Quotes
+A fresh, random set of motivational quotes animates through the header every time the app is opened.
 
-### 📚 Study History
-Recent study sessions are stored during the active Streamlit session.
+### 📲 Installable Mobile App (PWA)
+Students can install Study Buddy on their phone's home screen and open it like a native app.
 
-### ⬇️ Download Responses
-AI-generated study notes can be downloaded as a text file.
+### 🌍 Multi-language & Model Choice
+Get answers in English, Urdu, Arabic, Hindi, French or Spanish, and switch between Groq models (GPT-OSS 120B/20B, Llama 3.3 70B, Llama 3.1 8B).
+
+### ⬇️ Downloads
+Download notes, mind map outlines, flashcard decks and your full study history as plain `.txt` files that open on any device.
 
 ### 🌙 Light and Dark Mode
 The application supports customized light and dark themes.
@@ -52,16 +52,12 @@ The application supports customized light and dark themes.
 
 # 🖥️ Application Interface
 
-The application contains three main tabs:
-
-### 🏠 Dashboard
-Used to configure the AI, enter a topic, and generate study material.
-
-### 🧩 Quiz
-Used to complete AI-generated quizzes and view results.
-
-### 📚 History
-Displays recent study sessions.
+- **🏠 Dashboard** – choose a mode, upload material and generate study content
+- **💬 AI Tutor Chat** – chat with your AI tutor
+- **🧩 Quiz** – answer quizzes, see results and get mistake coaching
+- **🃏 Flashcards** – revise with flip cards
+- **📈 Progress** – streaks, badges, sessions and quiz trends
+- **📚 History** – search and export this session's study history
 
 ---
 
@@ -130,6 +126,8 @@ The Python application processes this JSON and converts it into an interactive q
 - Prompt Engineering
 - JSON
 - Python Dotenv
+- pypdf
+- Graphviz (mind maps)
 - HTML/CSS styling
 
 ---
@@ -253,6 +251,20 @@ in your browser.
 
 ---
 
+# 📲 Install as a Mobile App (PWA)
+
+Study Buddy is a Progressive Web App. The `static/` folder holds the app manifest and icons, and `.streamlit/config.toml` enables static file serving.
+
+1. Deploy the app to a public **HTTPS** address. Installing only works over HTTPS (or on `localhost`).
+2. Open the link on a phone:
+   - **Android (Chrome):** tap the **📲 Install app** button, or ⋮ menu → **Install app**
+   - **iPhone (Safari):** tap **Share** → **Add to Home Screen**
+   - **Laptop (Chrome / Edge):** click the install icon in the address bar
+
+The app opens full-screen with its own icon. It still needs an internet connection because the AI runs on Groq.
+
+---
+
 # 📦 Requirements
 
 The project uses:
@@ -261,6 +273,8 @@ The project uses:
 streamlit
 groq
 python-dotenv
+pypdf
+pillow
 ```
 
 ---

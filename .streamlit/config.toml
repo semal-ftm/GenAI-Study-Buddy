@@ -1,30 +1,42 @@
+[server]
+enableStaticServing = true
+
+[client]
+toolbarMode = "minimal"
+
 [theme]
 primaryColor = "#7C3AED"
+font = "Plus Jakarta Sans:https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap, sans-serif"
+headingFont = "Outfit:https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&display=swap, sans-serif"
+baseRadius = "large"
+buttonRadius = "14px"
+showWidgetBorder = true
+chartCategoricalColors = ["#7C3AED", "#0EA5E9", "#EC4899", "#10B981", "#F59E0B"]
 
 [theme.light]
-backgroundColor = "#F5F7FF"
+backgroundColor = "#F7F6FF"
 secondaryBackgroundColor = "#FFFFFF"
-textColor = "#172554"
-primaryColor = "#6366F1"
-borderColor = "#D9E0F0"
+textColor = "#1E1B4B"
+primaryColor = "#7C3AED"
+borderColor = "#E4E0F7"
 
 [theme.light.sidebar]
-backgroundColor = "#202B63"
-secondaryBackgroundColor = "#2F3780"
-textColor = "#F8FAFC"
-primaryColor = "#A78BFA"
-borderColor = "#47519B"
-
-[theme.dark]
-backgroundColor = "#0B1020"
-secondaryBackgroundColor = "#121A31"
-textColor = "#F8FAFC"
-primaryColor = "#A78BFA"
-borderColor = "#283451"
-
-[theme.dark.sidebar]
-backgroundColor = "#111A3D"
-secondaryBackgroundColor = "#1A2556"
+backgroundColor = "#1E1B4B"
+secondaryBackgroundColor = "#2E2A6B"
 textColor = "#F8FAFC"
 primaryColor = "#C4B5FD"
-borderColor = "#33416F"
+borderColor = "#3F3A85"
+
+[theme.dark]
+backgroundColor = "#0A0A1A"
+secondaryBackgroundColor = "#15142B"
+textColor = "#F5F3FF"
+primaryColor = "#A78BFA"
+borderColor = "#2A2850"
+
+[theme.dark.sidebar]
+backgroundColor = "#100F24"
+secondaryBackgroundColor = "#1C1A3D"
+textColor = "#F8FAFC"
+primaryColor = "#C4B5FD"
+borderColor = "#2E2B5C"

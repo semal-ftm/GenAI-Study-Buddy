@@ -1,0 +1,18 @@
+{
+  "id": "../../",
+  "name": "AI Study Buddy",
+  "short_name": "Study Buddy",
+  "description": "Explain, quiz, map and teach back any topic with your AI study buddy.",
+  "start_url": "../../",
+  "scope": "../../",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7F6FF",
+  "theme_color": "#6D28D9",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
