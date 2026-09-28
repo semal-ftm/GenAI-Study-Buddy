@@ -2977,7 +2977,7 @@ if (!w.__studyBuddyPwa) {
         box = d.createElement("div");
         box.id = "sb-install-help";
         box.style.cssText = [
-            "position:fixed", "right:18px", "bottom:76px", "z-index:999999",
+            "position:fixed", "left:18px", "bottom:76px", "z-index:999999",
             "max-width:290px", "padding:14px 16px", "border-radius:16px",
             "font:500 14px/1.5 'Plus Jakarta Sans',sans-serif", "color:#1E1B4B",
             "background:#FFFFFF", "box-shadow:0 18px 40px -12px rgba(30,27,75,.45)",
@@ -3001,7 +3001,7 @@ if (!w.__studyBuddyPwa) {
         button.id = "sb-install";
         button.textContent = "📲 Install app";
         button.style.cssText = [
-            "position:fixed", "right:18px", "bottom:18px", "z-index:999999",
+            "position:fixed", "left:18px", "bottom:18px", "z-index:999999",
             "padding:12px 20px", "border:none", "border-radius:999px",
             "font:600 15px 'Plus Jakarta Sans',sans-serif", "color:#fff", "cursor:pointer",
             "background:linear-gradient(135deg,#6366F1,#DB2777)",
