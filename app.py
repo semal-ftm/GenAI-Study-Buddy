@@ -2129,13 +2129,14 @@ with st.sidebar:
 
     with st.expander("📲 Install on your phone"):
         st.markdown(
-            "Tap the **📲 Install app** button at the bottom-right of the screen.\n\n"
-            "Or do it from your browser:\n\n"
-            "**Android (Chrome):** tap the **⋮** at the top-right of Chrome "
-            "(the browser, not the app) → **Install app**.\n\n"
+            "Tap the **📲 Install app** button at the bottom-left of the screen, "
+            "or do it from your browser:\n\n"
+            "**Android (Chrome):** tap **⋮** at the top-right of Chrome "
+            "(the browser, not the app) → **Install app** or **Add to Home screen**.\n\n"
             "**iPhone (Safari):** tap **Share** ⬆️ → **Add to Home Screen**.\n\n"
-            "**Laptop (Chrome / Edge):** click the install icon at the right "
-            "end of the address bar."
+            "**Laptop (Chrome):** **⋮** → **Cast, save and share** → "
+            "**Create shortcut…** → tick **Open as window**.\n\n"
+            "**Laptop (Edge):** **⋯** → **Apps** → **Install this site as an app**."
         )
 
 
@@ -2957,7 +2958,20 @@ if (!w.__studyBuddyPwa) {
     const isIOS = /iphone|ipad|ipod/i.test(ua);
     const isAndroid = /android/i.test(ua);
 
+    // On hosts like Streamlit Community Cloud the app runs inside the host's
+    // own page, so browsers can't install it; a home-screen shortcut still works.
+    const framed = w !== w.top;
+
     const helpText = () => {
+        if (framed) {
+            if (isIOS) {
+                return "In Safari, tap the Share button ⬆️ at the bottom of the screen, then choose “Add to Home Screen”.";
+            }
+            if (isAndroid) {
+                return "In Chrome, tap the ⋮ button at the top-right of the browser (not inside the app), then choose “Add to Home screen” → “Add”.";
+            }
+            return "In Chrome, open the browser's ⋮ menu (top-right of the window) → “Cast, save and share” → “Create shortcut…”, tick “Open as window”, then press “Create”. In Edge, open the ⋯ menu → “Apps” → “Install this site as an app”.";
+        }
         if (!w.isSecureContext) {
             return "To install, open the app's secure https:// link in Chrome or Safari.";
         }
@@ -2977,7 +2991,8 @@ if (!w.__studyBuddyPwa) {
         box = d.createElement("div");
         box.id = "sb-install-help";
         box.style.cssText = [
-            "position:fixed", "left:18px", "bottom:76px", "z-index:999999",
+            "position:fixed", "z-index:999999",
+            ...(framed ? ["top:64px", "left:50%", "transform:translateX(-50%)"] : ["left:18px", "bottom:76px"]),
             "max-width:290px", "padding:14px 16px", "border-radius:16px",
             "font:500 14px/1.5 'Plus Jakarta Sans',sans-serif", "color:#1E1B4B",
             "background:#FFFFFF", "box-shadow:0 18px 40px -12px rgba(30,27,75,.45)",
@@ -3001,11 +3016,16 @@ if (!w.__studyBuddyPwa) {
         button.id = "sb-install";
         button.textContent = "📲 Install app";
         button.style.cssText = [
-            "position:fixed", "left:18px", "bottom:18px", "z-index:999999",
+            "position:fixed", "z-index:999999",
             "padding:12px 20px", "border:none", "border-radius:999px",
             "font:600 15px 'Plus Jakarta Sans',sans-serif", "color:#fff", "cursor:pointer",
             "background:linear-gradient(135deg,#6366F1,#DB2777)",
             "box-shadow:0 12px 30px -10px rgba(124,58,237,.8)",
+            // Inside a host page the frame can be taller than the screen, so a
+            // bottom button may be off-screen; the top is always visible.
+            ...(framed
+                ? ["top:10px", "left:50%", "transform:translateX(-50%)", "padding:8px 16px", "font-size:14px"]
+                : ["left:18px", "bottom:18px"]),
         ].join(";");
 
         button.onclick = async () => {
