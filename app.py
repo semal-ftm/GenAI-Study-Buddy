@@ -2127,18 +2127,6 @@ with st.sidebar:
         key="language",
     )
 
-    with st.expander("📲 Install on your phone"):
-        st.markdown(
-            "Tap the **📲 Install app** button at the bottom-left of the screen, "
-            "or do it from your browser:\n\n"
-            "**Android (Chrome):** tap **⋮** at the top-right of Chrome "
-            "(the browser, not the app) → **Install app** or **Add to Home screen**.\n\n"
-            "**iPhone (Safari):** tap **Share** ⬆️ → **Add to Home Screen**.\n\n"
-            "**Laptop (Chrome):** **⋮** → **Cast, save and share** → "
-            "**Create shortcut…** → tick **Open as window**.\n\n"
-            "**Laptop (Edge):** **⋯** → **Apps** → **Install this site as an app**."
-        )
-
 
 api_key = find_api_key()
 
@@ -2927,6 +2915,7 @@ setTimeout(go, 300);
     )
 
 
+# Gives the app a proper name and icon if someone saves the link to their home screen.
 PWA_SCRIPT = """
 const w = window.parent;
 const d = w.document;
@@ -2950,115 +2939,6 @@ if (!w.__studyBuddyPwa) {
     add("meta", { name: "apple-mobile-web-app-capable", content: "yes" });
     add("meta", { name: "apple-mobile-web-app-title", content: "Study Buddy" });
     add("meta", { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" });
-
-    const installed =
-        w.matchMedia("(display-mode: standalone)").matches || w.navigator.standalone;
-
-    const ua = w.navigator.userAgent;
-    const isIOS = /iphone|ipad|ipod/i.test(ua);
-    const isAndroid = /android/i.test(ua);
-
-    // On hosts like Streamlit Community Cloud the app runs inside the host's
-    // own page, so browsers can't install it; a home-screen shortcut still works.
-    const framed = w !== w.top;
-
-    const helpText = () => {
-        if (framed) {
-            if (isIOS) {
-                return "In Safari, tap the Share button ⬆️ at the bottom of the screen, then choose “Add to Home Screen”.";
-            }
-            if (isAndroid) {
-                return "In Chrome, tap the ⋮ button at the top-right of the browser (not inside the app), then choose “Add to Home screen” → “Add”.";
-            }
-            return "In Chrome, open the browser's ⋮ menu (top-right of the window) → “Cast, save and share” → “Create shortcut…”, tick “Open as window”, then press “Create”. In Edge, open the ⋯ menu → “Apps” → “Install this site as an app”.";
-        }
-        if (!w.isSecureContext) {
-            return "To install, open the app's secure https:// link in Chrome or Safari.";
-        }
-        if (isIOS) {
-            return "In Safari, tap the Share button ⬆️ at the bottom of the screen, then choose “Add to Home Screen”.";
-        }
-        if (isAndroid) {
-            return "In Chrome, tap the ⋮ button at the top-right of the browser (not inside the app), then choose “Install app” or “Add to Home screen”.";
-        }
-        return "In Chrome or Edge, click the install icon at the right end of the address bar, or open the browser's ⋮ menu (top-right of the browser window) and choose “Install Study Buddy”.";
-    };
-
-    const showHelp = () => {
-        let box = d.getElementById("sb-install-help");
-        if (box) { box.remove(); return; }
-
-        box = d.createElement("div");
-        box.id = "sb-install-help";
-        box.style.cssText = [
-            "position:fixed", "z-index:999999",
-            ...(framed ? ["top:64px", "left:50%", "transform:translateX(-50%)"] : ["left:18px", "bottom:76px"]),
-            "max-width:290px", "padding:14px 16px", "border-radius:16px",
-            "font:500 14px/1.5 'Plus Jakarta Sans',sans-serif", "color:#1E1B4B",
-            "background:#FFFFFF", "box-shadow:0 18px 40px -12px rgba(30,27,75,.45)",
-        ].join(";");
-        box.innerHTML = "<b>📲 Install Study Buddy</b><br>";
-        box.appendChild(d.createTextNode(helpText()));
-
-        const close = d.createElement("div");
-        close.textContent = "Got it";
-        close.style.cssText = "margin-top:10px;font-weight:700;color:#7C3AED;cursor:pointer";
-        close.onclick = () => box.remove();
-        box.appendChild(close);
-
-        d.body.appendChild(box);
-    };
-
-    const showInstallButton = () => {
-        if (installed || d.getElementById("sb-install")) return;
-
-        const button = d.createElement("button");
-        button.id = "sb-install";
-        button.textContent = "📲 Install app";
-        button.style.cssText = [
-            "position:fixed", "z-index:999999",
-            "padding:12px 20px", "border:none", "border-radius:999px",
-            "font:600 15px 'Plus Jakarta Sans',sans-serif", "color:#fff", "cursor:pointer",
-            "background:linear-gradient(135deg,#6366F1,#DB2777)",
-            "box-shadow:0 12px 30px -10px rgba(124,58,237,.8)",
-            // Inside a host page the frame can be taller than the screen, so a
-            // bottom button may be off-screen; the top is always visible.
-            ...(framed
-                ? ["top:10px", "left:50%", "transform:translateX(-50%)", "padding:8px 16px", "font-size:14px"]
-                : ["left:18px", "bottom:18px"]),
-        ].join(";");
-
-        button.onclick = async () => {
-            const prompt = w.__studyBuddyInstall;
-
-            if (!prompt) {
-                showHelp();
-                return;
-            }
-
-            prompt.prompt();
-            const choice = await prompt.userChoice;
-            w.__studyBuddyInstall = null;
-
-            if (choice.outcome === "accepted") button.remove();
-        };
-
-        d.body.appendChild(button);
-    };
-
-    // Show the button straight away; it uses the browser's own install
-    // prompt when available and otherwise explains how to install.
-    showInstallButton();
-
-    w.addEventListener("beforeinstallprompt", (event) => {
-        event.preventDefault();
-        w.__studyBuddyInstall = event;
-    });
-
-    w.addEventListener("appinstalled", () => {
-        const button = d.getElementById("sb-install");
-        if (button) button.remove();
-    });
 }
 """
 

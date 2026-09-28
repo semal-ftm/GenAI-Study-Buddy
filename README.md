@@ -36,11 +36,8 @@ After generating a quiz or flashcards, the app jumps straight to that tab. Other
 ### 💬 Rotating Motivational Quotes
 A fresh, random set of motivational quotes animates through the header every time the app is opened.
 
-### 📲 Installable Mobile App (PWA)
-Students can install Study Buddy on their phone's home screen and open it like a native app.
-
-### 🌍 Multi-language & Model Choice
-Get answers in English, Urdu, Arabic, Hindi, French or Spanish, and switch between Groq models (GPT-OSS 120B/20B, Llama 3.3 70B, Llama 3.1 8B).
+### 🌍 Multi-language Answers
+Get answers in English, Urdu, Arabic, Hindi, French or Spanish.
 
 ### ⬇️ Downloads
 Download notes, mind map outlines, flashcard decks and your full study history as plain `.txt` files that open on any device.
@@ -251,17 +248,15 @@ in your browser.
 
 ---
 
-# 📲 Install as a Mobile App (PWA)
+# 🔗 Sharing the App
 
-Study Buddy is a Progressive Web App. The `static/` folder holds the app manifest and icons, and `.streamlit/config.toml` enables static file serving.
+Deploy the app (for example on Streamlit Community Cloud) and share its link. It works in any phone or laptop browser.
 
-1. Deploy the app to a public **HTTPS** address. Installing only works over HTTPS (or on `localhost`).
-2. Open the link on a phone:
-   - **Android (Chrome):** tap the **📲 Install app** button, or ⋮ menu → **Install app**
-   - **iPhone (Safari):** tap **Share** → **Add to Home Screen**
-   - **Laptop (Chrome / Edge):** click the install icon in the address bar
+To keep it one tap away, students can save the link to their home screen:
+- **Android (Chrome):** ⋮ menu → **Add to Home screen**
+- **iPhone (Safari):** **Share** → **Add to Home Screen**
 
-The app opens full-screen with its own icon. It still needs an internet connection because the AI runs on Groq.
+The `static/` folder holds the app icon and name used for that shortcut.
 
 ---
 
